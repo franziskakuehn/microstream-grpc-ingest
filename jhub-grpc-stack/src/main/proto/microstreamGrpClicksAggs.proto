@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_package = "orange.business.jhub";
+option java_multiple_files = true;
+
+service ClickAggService {
+
+  // A server-side streaming RPC (one of 4 service methods of RPC)
+  // where the client sends a
+  // request to the server and gets a stream to read a
+  // sequence of messages back. The client reads from the
+  // returned stream until there are no more messages.
+  // As you can see in our example, you specify a
+  // server-side streaming method by placing the stream
+  // keyword before the response type.
+  rpc PagesById(PageIdRequestAgg) returns (stream PageViewAgg) {}
+  
+  //simple RPC (one of 4 service methods of RPC)
+  // A simple RPC where the client sends a request to
+  // the server using the stub and waits for a response
+  // to come back, just like a normal function call.
+  rpc PagesCountById(PageIdRequestAgg) returns (PageIdCountResponseAgg) {}
+
+  // A server-side streaming RPC (one of 4 service methods of RPC)
+  // where the client sends a
+  // request to the server and gets a stream to read a
+  // sequence of messages back.
+  rpc UserClicksByIdOnPage(UserOnPageRequestAgg) returns (stream UserOnPageResponse) {}
+}
+
+message PageViewAgg{
+  int64 timestamp = 1;
+  int32 viewtime = 2;
+  string userid = 3;
+  string pageid = 4;
+}
+
+message PageIdCountResponseAgg{
+  int64 countPages = 1;
+}
+
+message PageIdRequestAgg{
+  string pageid = 1;
+}
+
+message UserOnPageRequestAgg{
+  string userid = 1;
+  string pageid = 2;
+}
+
+message UserOnPageResponse{
+  string hour = 1;
+  double viewtimeAvg = 2;
+  string userid = 3;
+  string pageid = 4;
+}

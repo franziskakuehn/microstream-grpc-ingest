@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "orange.business.jhub";
+option java_outer_classname = "GrpcCore";
+option objc_class_prefix = "HLW";
+
+package orange.business.jhub;
+
+service GreeterService {
+  // Sends a greeting
+  rpc SayHello (HelloRequestJHub) returns (HelloReplyJhub) {}
+}
+
+// The request message containing the user's name.
+message HelloRequestJHub {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReplyJhub {
+  string message = 1;
+}

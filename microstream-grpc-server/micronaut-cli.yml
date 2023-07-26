@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: orange.business.jhub
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, grpc, http-client, java, java-application, junit, logback, maven, micronaut-validation, microstream, netty-server, readme, serialization-jackson, shade, yaml]

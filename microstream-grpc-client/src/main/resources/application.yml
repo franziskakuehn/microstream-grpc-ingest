@@ -1,0 +1,40 @@
+micronaut:
+  application:
+    name: microstreamGrpcClient
+  server:
+    port: 9091
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+my:
+  server: localhost
+  port: 5050
+
+grpc:
+  channels:
+    clickservice:
+      address: "${my.server}:${my.port}"
+      plaintext: true
+      max-retry-attempts: 10
+  server:
+    port: 50051
+    keep-alive-time: 1h
+    # health.enabled: true
+
+microstream:
+  storage:
+    userPageClicks:
+      root-class: "orange.business.jhub.model.DataPageView"
+      storage-directory: "target/DataPageView"
+      channel-count: 4
+    userAvgTime:
+      root-class: "orange.business.jhub.model.DataViewtime"
+      storage-directory: "target/DataViewtime"
+      channel-count: 4
+
+endpoints:
+  health:
+    details-visible: ANONYMOUS
